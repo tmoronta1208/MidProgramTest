@@ -1,5 +1,7 @@
 package com.example.android.midprogramtest;
 
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -30,14 +32,13 @@ public class LoginActivity extends AppCompatActivity {
 
         login = getApplicationContext().getSharedPreferences("sharedPrefs", MODE_PRIVATE);
 
+        FirstFragment firstFragment = new FirstFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frag_container, firstFragment);
+        fragmentTransaction.commit();
+
         submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -55,6 +56,15 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, ListActivity.class);
                 intent.putExtra("email",email.getText().toString());
                 startActivity(intent);
+
+            }
+        });
+
+        checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
             }
         });
 
